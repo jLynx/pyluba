@@ -48,19 +48,17 @@ class DeviceType(Enum):
 
         if value == 0:
             return DeviceType.RTK
-        elif value == 1:
+        if value == 1:
             return DeviceType.LUBA
-        elif value == 2:
+        if value == 2:
             return DeviceType.LUBA_2
-        elif value == 3:
+        if value == 3:
             return DeviceType.LUBA_YUKA
-        else:
-            return DeviceType.UNKNOWN
+        return DeviceType.UNKNOWN
 
     @staticmethod
     def value_of_str(device_name, product_key=""):
-        """Determine the type of device based on the provided device name and
-        product key.
+        """Determine the type of device based on the provided device name and product key.
 
         Args:
             device_name (str): The name of the device.
@@ -93,8 +91,7 @@ class DeviceType(Enum):
 
     @staticmethod
     def has_4g(device_name, product_key=""):
-        """Check if the device has 4G capability based on the device name and
-        optional product key.
+        """Check if the device has 4G capability based on the device name and optional product key.
 
         This function determines the device type based on the device name and
         product key (if provided). It then checks if the device type has a value
@@ -142,8 +139,7 @@ class DeviceType(Enum):
 
     @staticmethod
     def is_luba_2(device_name, product_key=""):
-        """Check if the device type is LUBA 2 or higher based on the device name
-        and optional product key.
+        """Check if the device type is LUBA 2 or higher based on the device name and optional product key.
 
         Args:
             device_name (str): The name of the device.
@@ -201,8 +197,7 @@ class DeviceType(Enum):
 
     @staticmethod
     def contain_rtk_product_key(product_key):
-        """Check if the given product key is in a predefined list of RTK product
-        keys.
+        """Check if the given product key is in a predefined list of RTK product keys.
 
         Args:
             product_key (str): The product key to be checked.
@@ -262,3 +257,17 @@ class DeviceType(Enum):
 
     def is_support_video(self):
         return self == DeviceType.LUBA_YUKA
+
+    def get_blade_height_range(self):
+        """Returns the blade height range (min, max) for Luba 1 and Luba 2 devices.
+
+        Returns:
+            tuple: A tuple containing the minimum and maximum blade height (in mm),
+                or None if the device type doesn't have a specified range.
+
+        """
+        if self == DeviceType.LUBA:
+            return (30, 70)
+        if self == DeviceType.LUBA_2:
+            return (25, 70)
+        return None
