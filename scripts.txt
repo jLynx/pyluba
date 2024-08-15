@@ -21,6 +21,6 @@ poetry run protoc -I=. --python_out=. --pyi_out=. ./pymammotion/proto/*.proto
 
 poetry run ruff check --fix
 poetry run mypy {filename}
-poetry run pylint pyluba
+poetry run pylint pymammotion
 poetry run pre-commit run --all-files
 
